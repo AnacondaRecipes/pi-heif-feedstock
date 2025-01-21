@@ -1,0 +1,55 @@
+{% set name = "pi-heif" %}
+{% set version = "0.21.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pi_heif-{{ version }}.tar.gz
+  sha256: 4902cdb84e75505e1d9abdd5aff1e6dcfebe569ec825162d68a4a399a43689a4
+
+build:
+  skip: true  # [py<39]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - python
+    - setuptools >=67.8
+    - wheel
+    - pip
+    - libheif >=1.17.0
+  run:
+    - python
+    - pillow >=10.1.0
+    - libheif >=1.17.0
+
+test:
+  source_files:
+    - tests
+  imports:
+    - pi_heif
+  commands:
+    - pip check
+    - pytest tests
+  requires:
+    - pip
+    - pytest
+
+about:
+  home: https://github.com/bigcat88/pillow_heif
+  summary: Python interface for libheif library
+  dev_url: https://github.com/bigcat88/pillow_heif
+  license: BSD-3-Clause AND BSD-3-Clause-flex AND EPL-2.0
+  license_file:
+    - LICENSE.txt
+    - tests/images/heif_other/avif/LICENSE.txt
+    - tests/images/heif_other/nokia/COPYRIGHT.txt
+
+extra:
+  recipe-maintainers:
+    - Cansisti
