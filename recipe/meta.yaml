@@ -10,7 +10,9 @@ source:
   sha256: 4902cdb84e75505e1d9abdd5aff1e6dcfebe569ec825162d68a4a399a43689a4
 
 build:
-  skip: true  # [py<39 or s390x]
+  # s390x is missing libheif
+  # windows build requires msys2
+  skip: true  # [py<39 or s390x or win]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
