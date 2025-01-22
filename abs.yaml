@@ -5,5 +5,5 @@ upload_channels:
   - sfe1ed40
 
 channels:
-  - https://staging.continuum.io/prefect/fs/libheif-feedstock/pr1/30e2afa
-  - https://staging.continuum.io/prefect/fs/x265-feedstock/pr1/b608b1e
+  - https://staging.continuum.io/prefect/fs/libheif-feedstock/pr1/19beb6c
+  - https://staging.continuum.io/prefect/fs/x265-feedstock/pr1/0acc1f6
