@@ -18,17 +18,17 @@ build:
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
+    - {{ compiler('c') }}
   host:
     - python
     - setuptools >=67.8
     - wheel
     - pip
-    - libheif >=1.17.0
+    - libheif 1.19.5
   run:
     - python
     - pillow >=10.1.0
-    - libheif >=1.17.0
+    - libheif
 
 test:
   source_files:
@@ -54,7 +54,12 @@ about:
     - pi-heif/LICENSES_bundled.txt
     - tests/images/heif_other/avif/LICENSE.txt
     - tests/images/heif_other/nokia/COPYRIGHT.txt
-  doc_url: https://pillow-heif.readthedocs.io/en/latest/
+  doc_url: https://pillow-heif.readthedocs.io
+  description: |
+    This is a light version of Pillow-Heif with more permissive license for binary wheels.
+    It includes only HEIF decoder and does not support save operations.
+    All codebase are the same, refer to pillow-heif docs
+    The only difference is the name of the imported project.
 
 extra:
   recipe-maintainers:
