@@ -50,6 +50,8 @@ about:
   license_family: BSD
   license_file:
     - LICENSE.txt
+    - LICENSES_bundled.txt
+    - pi-heif/LICENSES_bundled.txt
     - tests/images/heif_other/avif/LICENSE.txt
     - tests/images/heif_other/nokia/COPYRIGHT.txt
   doc_url: https://pillow-heif.readthedocs.io/en/latest/
