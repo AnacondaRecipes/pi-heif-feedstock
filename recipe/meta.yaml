@@ -1,0 +1,65 @@
+{% set name = "pi-heif" %}
+{% set version = "0.21.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pi_heif-{{ version }}.tar.gz
+  sha256: 4902cdb84e75505e1d9abdd5aff1e6dcfebe569ec825162d68a4a399a43689a4
+
+build:
+  # s390x is missing libheif
+  # windows build requires msys2
+  skip: true  # [py<39 or s390x or win]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - python
+    - setuptools >=67.8
+    - wheel
+    - pip
+    - libheif 1.19.5
+  run:
+    - python
+    - pillow >=10.1.0
+    - libheif
+
+test:
+  source_files:
+    - tests
+  imports:
+    - pi_heif
+  commands:
+    - pip check
+    - pytest tests
+  requires:
+    - pip
+    - pytest
+
+about:
+  home: https://github.com/bigcat88/pillow_heif
+  summary: Python interface for libheif library
+  dev_url: https://github.com/bigcat88/pillow_heif
+  license: BSD-3-Clause AND BSD-3-Clause-flex AND EPL-2.0
+  license_family: BSD
+  license_file:
+    - LICENSE.txt
+    - LICENSES_bundled.txt
+    - tests/images/heif_other/avif/LICENSE.txt
+    - tests/images/heif_other/nokia/COPYRIGHT.txt
+  doc_url: https://pillow-heif.readthedocs.io
+  description: |
+    This is a light version of Pillow-Heif with more permissive license for binary wheels.
+    It includes only HEIF decoder and does not support save operations.
+    All codebase are the same, refer to pillow-heif docs
+    The only difference is the name of the imported project.
+
+extra:
+  recipe-maintainers:
+    - Cansisti
